@@ -1,5 +1,9 @@
+// ==========================================
+// AI MODEL ROUTER
+// ==========================================
 export async function callModel(env, prompt) {
-  // Choose model (later we will make this dynamic)
+  // For now we hardcode OpenAI
+  // Later we will make this dynamic based on user mode
   const model = "openai"
 
   if (model === "openai") {
@@ -21,30 +25,60 @@ export async function callModel(env, prompt) {
   return "No model selected"
 }
 
-// ----------------------------
-// OPENAI
-// ----------------------------
+
+
+// ==========================================
+// OPENAI — REAL API CALL
+// ==========================================
 async function callOpenAI(env, prompt) {
-  return `OpenAI placeholder response: ${prompt}`
+  const apiKey = env.OPENAI_API_KEY
+
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      messages: [
+        { role: "user", content: prompt }
+      ]
+    })
+  })
+
+  const data = await response.json().catch(() => null)
+
+  if (!data || !data.choices) {
+    return "OpenAI error or empty response"
+  }
+
+  return data.choices[0].message.content
 }
 
-// ----------------------------
-// GEMINI
-// ----------------------------
+
+
+// ==========================================
+// GEMINI — Placeholder (real API next)
+// ==========================================
 async function callGemini(env, prompt) {
   return `Gemini placeholder response: ${prompt}`
 }
 
-// ----------------------------
-// GROK
-// ----------------------------
+
+
+// ==========================================
+// GROK — Placeholder (real API next)
+// ==========================================
 async function callGrok(env, prompt) {
   return `Grok placeholder response: ${prompt}`
 }
 
-// ----------------------------
-// VERCEL AI
-// ----------------------------
+
+
+// ==========================================
+// VERCEL AI — Placeholder (real API next)
+// ==========================================
 async function callVercel(env, prompt) {
   return `Vercel AI placeholder response: ${prompt}`
 }
