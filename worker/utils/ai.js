@@ -1,28 +1,26 @@
 // ==========================================
-// AI MODEL ROUTER
+// AI MODEL ROUTER (DYNAMIC)
 // ==========================================
-export async function callModel(env, prompt) {
-  // For now we hardcode OpenAI
-  // Later we will make this dynamic based on user mode
-  const model = "openai"
+export async function callModel(env, prompt, model = "openai") {
+  const selected = model || "openai"
 
-  if (model === "openai") {
+  if (selected === "openai") {
     return await callOpenAI(env, prompt)
   }
 
-  if (model === "gemini") {
+  if (selected === "gemini") {
     return await callGemini(env, prompt)
   }
 
-  if (model === "grok") {
+  if (selected === "grok") {
     return await callGrok(env, prompt)
   }
 
-  if (model === "vercel") {
+  if (selected === "vercel") {
     return await callVercel(env, prompt)
   }
 
-  return "No model selected"
+  return "No valid model selected"
 }
 
 
@@ -90,6 +88,8 @@ async function callGemini(env, prompt) {
   return data.candidates[0].content.parts[0].text
 }
 
+
+
 // ==========================================
 // GROK — REAL API CALL (xAI)
 // ==========================================
@@ -120,6 +120,7 @@ async function callGrok(env, prompt) {
 }
 
 
+
 // ==========================================
 // VERCEL AI — REAL API CALL
 // ==========================================
@@ -133,7 +134,7 @@ async function callVercel(env, prompt) {
       "Authorization": `Bearer ${apiKey}`
     },
     body: JSON.stringify({
-      model: "llama-3.1-8b-instruct",   // default model (you can change later)
+      model: "llama-3.1-8b-instruct",
       messages: [
         { role: "user", content: prompt }
       ]
