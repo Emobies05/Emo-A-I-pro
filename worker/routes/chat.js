@@ -1,11 +1,6 @@
 export async function handleChat(request, env) {
-  const body = await request.json()
-
   return new Response(
-    JSON.stringify({
-      message: "Chat route working",
-      received: body
-    }),
+    JSON.stringify({ route: "chat", status: "ok" }),
     { status: 200, headers: { "Content-Type": "application/json" } }
   )
 }
