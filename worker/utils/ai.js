@@ -91,10 +91,32 @@ async function callGemini(env, prompt) {
 }
 
 // ==========================================
-// GROK — Placeholder (real API next)
+// GROK — REAL API CALL (xAI)
 // ==========================================
 async function callGrok(env, prompt) {
-  return `Grok placeholder response: ${prompt}`
+  const apiKey = env.GROK_API_KEY
+
+  const response = await fetch("https://api.x.ai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: "grok-2-latest",
+      messages: [
+        { role: "user", content: prompt }
+      ]
+    })
+  })
+
+  const data = await response.json().catch(() => null)
+
+  if (!data || !data.choices) {
+    return "Grok error or empty response"
+  }
+
+  return data.choices[0].message.content
 }
 
 
