@@ -120,10 +120,31 @@ async function callGrok(env, prompt) {
 }
 
 
-
 // ==========================================
-// VERCEL AI — Placeholder (real API next)
+// VERCEL AI — REAL API CALL
 // ==========================================
 async function callVercel(env, prompt) {
-  return `Vercel AI placeholder response: ${prompt}`
+  const apiKey = env.VERCEL_AI_API_KEY
+
+  const response = await fetch("https://api.vercel.ai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: "llama-3.1-8b-instruct",   // default model (you can change later)
+      messages: [
+        { role: "user", content: prompt }
+      ]
+    })
+  })
+
+  const data = await response.json().catch(() => null)
+
+  if (!data || !data.choices) {
+    return "Vercel AI error or empty response"
+  }
+
+  return data.choices[0].message.content
 }
