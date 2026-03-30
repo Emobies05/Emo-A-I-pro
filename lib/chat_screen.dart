@@ -1,3 +1,4 @@
+import 'package:emo_a_i_pro/emo_api.dart';
 void sendMessage() async {
   final userMessage = controller.text.trim();
   if (userMessage.isEmpty) return;
