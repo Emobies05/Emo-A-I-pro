@@ -1,0 +1,17 @@
+thewall-ui/
+  app/
+    page.tsx
+    chat/
+      page.tsx
+    wallet/
+      page.tsx
+    dashboard/
+      page.tsx
+  components/
+    ChatUI.tsx
+    WalletPanel.tsx
+    Layout.tsx
+  lib/
+    api.ts   // calls api.thewall.ai
+  next.config.js
+  package.json
