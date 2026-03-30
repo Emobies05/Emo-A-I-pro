@@ -7,6 +7,8 @@ on:
       - "lib/**"
       - "assets/**"
       - "pubspec.yaml"
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   flutter:
