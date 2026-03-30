@@ -186,4 +186,4 @@ Emo AI Pro is not just an app — it’s a living AI companion with personality,
 ---
 
 🦋 Want a version with badges, emojis, or a dark theme?
-Tell me your style and I’ll generate a second version.
+Tell me your style and I’ll generate a second version.🇮🇳🇦🇪
