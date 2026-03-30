@@ -53,4 +53,68 @@ class ButterflyState extends ChangeNotifier {
   // User typing reaction
   void userTyping() {
     isUserTyping = true;
-    glowColor = Colors.c
+    glowColor = Colors.cyanAccent;
+    glowStrength = 1.0;
+    wingSpeed = 1.4;
+    notifyListeners();
+  }
+
+  void userStopTyping() {
+    isUserTyping = false;
+    wingSpeed = 1.0;
+    glowStrength = 0.6;
+    notifyListeners();
+  }
+
+  // Voice reaction
+  void startListening() {
+    isListening = true;
+    glowColor = Colors.purpleAccent;
+    glowStrength = 1.0;
+    wingSpeed = 1.8;
+    notifyListeners();
+  }
+
+  void stopListening() {
+    isListening = false;
+    wingSpeed = 1.0;
+    glowStrength = 0.6;
+    notifyListeners();
+  }
+
+  // Sleep mode
+  void sleep() {
+    isSleeping = true;
+    glowStrength = 0.2;
+    wingSpeed = 0.4;
+    notifyListeners();
+  }
+
+  void wake() {
+    isSleeping = false;
+    glowStrength = 1.0;
+    wingSpeed = 1.2;
+    notifyListeners();
+  }
+
+  // Emotion detection
+  void applyEmotion(String text) {
+    final lower = text.toLowerCase();
+
+    if (lower.contains("error") || lower.contains("failed")) {
+      glowColor = Colors.redAccent;
+    } else if (lower.contains("warning") || lower.contains("careful")) {
+      glowColor = Colors.yellowAccent;
+    } else if (lower.contains("love") || lower.contains("❤️")) {
+      glowColor = Colors.pinkAccent;
+    } else if (lower.contains("info") || lower.contains("note")) {
+      glowColor = Colors.cyanAccent;
+    } else {
+      glowColor = Colors.blueAccent;
+    }
+
+    glowStrength = 1.0;
+    wingSpeed = 1.4;
+    notifyListeners();
+  }
+}
