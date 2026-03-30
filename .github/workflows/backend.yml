@@ -29,12 +29,19 @@ jobs:
 
     - name: Install dependencies
       working-directory: emo-ai-pro
-      run: npm ci
+      run: npm install
 
     - name: Lint
       working-directory: emo-ai-pro
       run: npm run lint --if-present
 
+    - name: Test
+      working-directory: emo-ai-pro
+      run: npm test --if-present
+
+    - name: Build
+      working-directory: emo-ai-pro
+      run: npm run build --if-present
     - name: Test
       working-directory: emo-ai-pro
       run: npm test --if-present
