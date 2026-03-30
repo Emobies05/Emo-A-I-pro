@@ -1,40 +1,30 @@
 import 'package:flutter/material.dart';
 
 class ButterflyState extends ChangeNotifier {
-  // Glow color
   Color glowColor = Colors.blueAccent;
-
-  // Glow intensity (0.0 to 1.0)
   double glowStrength = 0.6;
-
-  // Wing speed multiplier
   double wingSpeed = 1.0;
 
-  // Sleep mode
   bool isSleeping = false;
-
-  // Voice mode
   bool isListening = false;
-
-  // AI typing mode
   bool isAiTyping = false;
-
-  // User typing mode
   bool isUserTyping = false;
 
-  // Update glow color
+  // Flower / landing
+  bool isLanding = false;
+  bool isOnFlower = false;
+  Offset flowerPosition = const Offset(150, 500);
+
   void setGlow(Color color) {
     glowColor = color;
     notifyListeners();
   }
 
-  // Update glow strength
   void setGlowStrength(double strength) {
     glowStrength = strength;
     notifyListeners();
   }
 
-  // Set AI typing reaction
   void aiTyping() {
     isAiTyping = true;
     glowColor = Colors.blueAccent;
@@ -50,7 +40,6 @@ class ButterflyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  // User typing reaction
   void userTyping() {
     isUserTyping = true;
     glowColor = Colors.cyanAccent;
@@ -66,7 +55,6 @@ class ButterflyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Voice reaction
   void startListening() {
     isListening = true;
     glowColor = Colors.purpleAccent;
@@ -82,7 +70,6 @@ class ButterflyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Sleep mode
   void sleep() {
     isSleeping = true;
     glowStrength = 0.2;
@@ -97,7 +84,6 @@ class ButterflyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Emotion detection
   void applyEmotion(String text) {
     final lower = text.toLowerCase();
 
@@ -115,6 +101,31 @@ class ButterflyState extends ChangeNotifier {
 
     glowStrength = 1.0;
     wingSpeed = 1.4;
+    notifyListeners();
+  }
+
+  // Landing on flower
+  void startLanding() {
+    isLanding = true;
+    isOnFlower = false;
+    glowColor = Colors.pinkAccent;
+    glowStrength = 1.0;
+    wingSpeed = 0.8;
+    notifyListeners();
+  }
+
+  void landOnFlower() {
+    isLanding = false;
+    isOnFlower = true;
+    wingSpeed = 0.3;
+    glowStrength = 0.4;
+    notifyListeners();
+  }
+
+  void takeOff() {
+    isOnFlower = false;
+    wingSpeed = 1.4;
+    glowStrength = 1.0;
     notifyListeners();
   }
 }
