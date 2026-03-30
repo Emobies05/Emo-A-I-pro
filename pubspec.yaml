@@ -1,0 +1,28 @@
+name: emo_ai_pro
+description: Emo AI Pro Chat + TheWall Flying AI
+publish_to: "none"
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  http: ^1.2.0
+  shared_preferences: ^2.3.2
+  speech_to_text: ^6.6.0
+  flutter_tts: ^3.8.5
+  audioplayers: ^5.2.0
+  flutter_animate: ^4.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/thewall_butterfly.png
+    - assets/wing.wav
