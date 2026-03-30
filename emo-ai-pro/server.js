@@ -1,7 +1,3 @@
-// ===============================
-// Emo-AI-Pro Backend (server.js)
-// ===============================
-
 import express from "express";
 import axios from "axios";
 import cors from "cors";
@@ -12,9 +8,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ---------------------------------------
-// 1. Fallback Chain
-// ---------------------------------------
+// ------------------------------
+// Fallback Chain
+// ------------------------------
 async function askEmoAIPro(prompt) {
   const chain = [callOpenAI, callGemini, callGrok, callVercel];
 
@@ -22,17 +18,15 @@ async function askEmoAIPro(prompt) {
     try {
       const reply = await fn(prompt);
       if (reply) return reply;
-    } catch (e) {
-      // continue to next model
-    }
+    } catch (e) {}
   }
 
   return "All AI engines are temporarily unavailable. Please try again later.";
 }
 
-// ---------------------------------------
-// 2. Model Functions
-// ---------------------------------------
+// ------------------------------
+// Model Functions
+// ------------------------------
 async function callOpenAI(prompt) {
   const res = await axios.post(
     "https://api.openai.com/v1/chat/completions",
@@ -44,7 +38,6 @@ async function callOpenAI(prompt) {
       headers: { Authorization: `Bearer ${process.env.OPENAI_KEY}` },
     }
   );
-
   return res.data.choices[0].message.content;
 }
 
@@ -55,7 +48,6 @@ async function callGemini(prompt) {
       contents: [{ parts: [{ text: prompt }] }],
     }
   );
-
   return res.data.candidates[0].content.parts[0].text;
 }
 
@@ -70,7 +62,6 @@ async function callGrok(prompt) {
       headers: { Authorization: `Bearer ${process.env.GROK_KEY}` },
     }
   );
-
   return res.data.choices[0].message.content;
 }
 
@@ -85,22 +76,21 @@ async function callVercel(prompt) {
       headers: { Authorization: `Bearer ${process.env.VERCEL_KEY}` },
     }
   );
-
   return res.data.choices[0].message.content;
 }
 
-// ---------------------------------------
-// 3. Chat Route
-// ---------------------------------------
+// ------------------------------
+// Chat Route
+// ------------------------------
 app.post("/chat", async (req, res) => {
   const { message } = req.body;
   const reply = await askEmoAIPro(message);
   res.json({ reply });
 });
 
-// ---------------------------------------
-// 4. Start Server
-// ---------------------------------------
+// ------------------------------
+// Start Server
+// ------------------------------
 app.listen(3000, () => {
   console.log("Emo-AI-Pro backend running on port 3000");
 });
