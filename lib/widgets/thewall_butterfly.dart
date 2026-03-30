@@ -23,6 +23,7 @@ class _TheWallButterflyState extends State<TheWallButterfly>
   Offset _position = const Offset(200, 200);
   Timer? _moveTimer;
   Timer? _sleepTimer;
+  Timer? _landingTimer;
   Size _screenSize = Size.zero;
 
   @override
@@ -40,13 +41,17 @@ class _TheWallButterflyState extends State<TheWallButterfly>
 
     _startMoveTimer();
     _startSleepTimer();
+    _startLandingTimer();
   }
 
   void _startMoveTimer() {
     _moveTimer?.cancel();
     _moveTimer = Timer.periodic(const Duration(seconds: 15), (_) {
-      _playWingSound();
-      _moveToRandomPosition();
+      final state = context.read<ButterflyState>();
+      if (!state.isOnFlower && !state.isLanding) {
+        _playWingSound();
+        _moveToRandomPosition();
+      }
     });
   }
 
@@ -56,8 +61,20 @@ class _TheWallButterflyState extends State<TheWallButterfly>
       final controller = context.read<ButterflyState>();
       if (!controller.isAiTyping &&
           !controller.isUserTyping &&
-          !controller.isListening) {
+          !controller.isListening &&
+          !controller.isOnFlower &&
+          !controller.isLanding) {
         controller.sleep();
+      }
+    });
+  }
+
+  void _startLandingTimer() {
+    _landingTimer?.cancel();
+    _landingTimer = Timer.periodic(const Duration(seconds: 40), (_) {
+      final state = context.read<ButterflyState>();
+      if (!state.isOnFlower && !state.isLanding) {
+        state.startLanding();
       }
     });
   }
@@ -84,6 +101,7 @@ class _TheWallButterflyState extends State<TheWallButterfly>
   void dispose() {
     _moveTimer?.cancel();
     _sleepTimer?.cancel();
+    _landingTimer?.cancel();
     _floatController.dispose();
     _player.dispose();
     super.dispose();
@@ -97,8 +115,26 @@ class _TheWallButterflyState extends State<TheWallButterfly>
       _screenSize = MediaQuery.of(context).size;
     }
 
+    // If landing, move toward flower
+    if (state.isLanding) {
+      final target = Offset(
+        state.flowerPosition.dx,
+        state.flowerPosition.dy - 80,
+      );
+      final diff = target - _position;
+      if (diff.distance > 5) {
+        _position = _position + diff * 0.08;
+      } else {
+        state.landOnFlower();
+        Future.delayed(const Duration(seconds: 6), () {
+          state.takeOff();
+          _startMoveTimer();
+        });
+      }
+    }
+
     return AnimatedPositioned(
-      duration: const Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
       left: _position.dx,
       top: _position.dy,
