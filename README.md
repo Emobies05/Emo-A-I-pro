@@ -176,14 +176,11 @@ Emo-A-I-pro/
 
 ---
 
-❤️ Made by Thewin
-Built in Dubai.  
-Built with emotion.  
-Built for real users.
+❤️ Made by Thewin 🇮🇳
+Built in Dubai.  🇦🇪
+Built with emotion. 💯 
+Built for real users.💕
 
 Emo AI Pro is not just an app — it’s a living AI companion with personality, presence, and emotional resonance.
 
----
-
-🦋 Want a version with badges, emojis, or a dark theme?
-Tell me your style and I’ll generate a second version.🇮🇳🇦🇪
+---   Thewin,TheWall,Emobies,Emowall                           
