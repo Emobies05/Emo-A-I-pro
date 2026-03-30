@@ -28,5 +28,4 @@ jobs:
 
     # Uncomment to auto-publish
     # - name: Publish Worker
-    #   working-directory: worker
-    #   run: wrangler publish
+    #   working
