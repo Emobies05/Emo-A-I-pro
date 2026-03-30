@@ -1,0 +1,22 @@
+thewall-backend/
+  src/
+    index.ts
+    routes/
+      chat.ts
+      auth.ts
+      wallet.ts
+      health.ts
+    services/
+      aiRouter.ts
+      openai.ts
+      gemini.ts
+      grok.ts
+      vercelAi.ts
+      web3Rpc.ts
+    core/
+      logger.ts
+      config.ts
+      errors.ts
+  package.json
+  tsconfig.json
+  Dockerfile (optional)
