@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:provider/provider.dart';
+import '../controllers/butterfly_controller.dart';
 
 class TheWallButterfly extends StatefulWidget {
   const TheWallButterfly({super.key});
@@ -20,6 +22,7 @@ class _TheWallButterflyState extends State<TheWallButterfly>
 
   Offset _position = const Offset(200, 200);
   Timer? _moveTimer;
+  Timer? _sleepTimer;
   Size _screenSize = Size.zero;
 
   @override
@@ -28,7 +31,7 @@ class _TheWallButterflyState extends State<TheWallButterfly>
 
     _floatController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1800),
+      duration: const Duration(milliseconds: 1600),
     )..repeat(reverse: true);
 
     _floatY = Tween<double>(begin: -10, end: 10).animate(
@@ -36,6 +39,7 @@ class _TheWallButterflyState extends State<TheWallButterfly>
     );
 
     _startMoveTimer();
+    _startSleepTimer();
   }
 
   void _startMoveTimer() {
@@ -43,6 +47,18 @@ class _TheWallButterflyState extends State<TheWallButterfly>
     _moveTimer = Timer.periodic(const Duration(seconds: 15), (_) {
       _playWingSound();
       _moveToRandomPosition();
+    });
+  }
+
+  void _startSleepTimer() {
+    _sleepTimer?.cancel();
+    _sleepTimer = Timer.periodic(const Duration(seconds: 20), (_) {
+      final controller = context.read<ButterflyState>();
+      if (!controller.isAiTyping &&
+          !controller.isUserTyping &&
+          !controller.isListening) {
+        controller.sleep();
+      }
     });
   }
 
@@ -67,6 +83,7 @@ class _TheWallButterflyState extends State<TheWallButterfly>
   @override
   void dispose() {
     _moveTimer?.cancel();
+    _sleepTimer?.cancel();
     _floatController.dispose();
     _player.dispose();
     super.dispose();
@@ -74,6 +91,8 @@ class _TheWallButterflyState extends State<TheWallButterfly>
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<ButterflyState>();
+
     if (_screenSize == Size.zero) {
       _screenSize = MediaQuery.of(context).size;
     }
@@ -85,6 +104,7 @@ class _TheWallButterflyState extends State<TheWallButterfly>
       top: _position.dy,
       child: GestureDetector(
         onPanUpdate: (details) {
+          context.read<ButterflyState>().wake();
           setState(() {
             _position += details.delta;
           });
@@ -96,14 +116,21 @@ class _TheWallButterflyState extends State<TheWallButterfly>
           animation: _floatController,
           builder: (_, child) {
             return Transform.translate(
-              offset: Offset(0, _floatY.value),
+              offset: Offset(0, _floatY.value * state.wingSpeed),
               child: Container(
                 decoration: BoxDecoration(
                   boxShadow: [
+                    // OUTER GLOW
                     BoxShadow(
-                      color: Colors.blueAccent.withOpacity(0.6),
-                      blurRadius: 30,
-                      spreadRadius: 10,
+                      color: state.glowColor.withOpacity(state.glowStrength),
+                      blurRadius: 40,
+                      spreadRadius: 20,
+                    ),
+                    // INNER GLOW
+                    BoxShadow(
+                      color: state.glowColor.withOpacity(state.glowStrength),
+                      blurRadius: 10,
+                      spreadRadius: -5,
                     ),
                   ],
                 ),
