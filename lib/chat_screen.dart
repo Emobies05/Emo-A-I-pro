@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter_tts/flutter_tts.dart';
 
 import 'emo_api.dart';
+import 'controllers/butterfly_controller.dart';
 import 'widgets/thewall_butterfly.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -72,22 +74,27 @@ class _ChatScreenState extends State<ChatScreen> {
     final userMessage = controller.text.trim();
     if (userMessage.isEmpty || isStreaming) return;
 
+    final butterfly = context.read<ButterflyState>();
+    butterfly.userTyping();
+    butterfly.wake();
+
     setState(() {
       messages.add({
         "role": "user",
         "text": userMessage,
       });
-      isTyping = true;
+      isTyping = false;
     });
 
     controller.clear();
     _scrollToBottom();
     await _saveHistory();
 
+    butterfly.aiTyping();
+
     final fullReply = await EmoAIPro.sendMessage(userMessage);
 
     setState(() {
-      isTyping = false;
       isStreaming = true;
       messages.add({
         "role": "assistant",
@@ -96,26 +103,38 @@ class _ChatScreenState extends State<ChatScreen> {
     });
 
     final int index = messages.length - 1;
+
     for (int i = 0; i < fullReply.length; i++) {
       await Future.delayed(const Duration(milliseconds: 15));
       if (!mounted) return;
+
       setState(() {
         messages[index]["text"] = fullReply.substring(0, i + 1);
       });
+
       _scrollToBottom();
     }
+
+    butterfly.aiStopTyping();
+    butterfly.applyEmotion(fullReply);
+    butterfly.wake();
 
     setState(() {
       isStreaming = false;
     });
+
     await _saveHistory();
   }
 
   Future<void> _startListening() async {
+    final butterfly = context.read<ButterflyState>();
+
     if (!isListening) {
       final available = await speech.initialize();
       if (available) {
         setState(() => isListening = true);
+        butterfly.startListening();
+
         speech.listen(onResult: (result) {
           setState(() {
             controller.text = result.recognizedWords;
@@ -124,6 +143,7 @@ class _ChatScreenState extends State<ChatScreen> {
       }
     } else {
       setState(() => isListening = false);
+      butterfly.stopListening();
       speech.stop();
     }
   }
@@ -170,6 +190,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final butterfly = context.watch<ButterflyState>();
+
     return Scaffold(
       backgroundColor: const Color(0xFF050509),
       body: Stack(
@@ -221,10 +243,14 @@ class _ChatScreenState extends State<ChatScreen> {
                           controller: controller,
                           style: const TextStyle(color: Colors.white),
                           decoration: const InputDecoration(
-                            hintText: "Message Emo‑AI Pro…",
+                            hintText: "Message TheWall AI…",
                             hintStyle: TextStyle(color: Colors.white38),
                             border: InputBorder.none,
                           ),
+                          onChanged: (_) {
+                            butterfly.userTyping();
+                            butterfly.wake();
+                          },
                           onSubmitted: (_) => sendMessage(),
                         ),
                       ),
@@ -239,7 +265,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ],
           ),
 
-          /// ⭐ TheWall Flying AI
+          /// ⭐ TheWall Reactive Butterfly
           const TheWallButterfly(),
         ],
       ),
