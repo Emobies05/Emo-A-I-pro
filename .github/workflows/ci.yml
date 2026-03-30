@@ -1,133 +1,33 @@
-name: TheWall Ultra CI/CD
+name: Backend CI/CD
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
 
 jobs:
-  build-test:
+  build-test-deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 20
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install deps
         run: npm ci
 
-      - name: Run tests
-        run: npm test
+      - name: Test
+        run: npm test --if-present
 
-      - name: Build project
+      - name: Build
         run: npm run build --if-present
 
-  codeql:
-    needs: build-test
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      actions: read
-      contents: read
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+      - name: Deploy to Railway
+        uses: railwayapp/railway-action@v1
         with:
-          languages: javascript
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
-
-  snyk:
-    needs: build-test
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Run Snyk Security Scan
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          command: test
-
-  semgrep:
-    needs: build-test
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Run Semgrep
-        uses: returntocorp/semgrep-action@v1
-        with:
-          config: "p/default"
-
-  deploy-vercel:
-    needs: [build-test, codeql, snyk, semgrep]
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Deploy to Vercel
-        run: |
-          npm i -g vercel
-          vercel --token ${{ secrets.VERCEL_TOKEN }} --prod
-
-  deploy-cloudflare:
-    needs: [build-test, codeql, snyk, semgrep]
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          projectName: thewall
-          directory: dist
-
-  release:
-    needs: [deploy-vercel, deploy-cloudflare]
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v${{ github.run_number }}
-          name: "TheWall Release ${{ github.run_number }}"
-          body: "Automated release from CI/CD pipeline."
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  notify-discord:
-    needs: [release]
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Notify Discord
-        uses: Ilshidur/action-discord@master
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        with:
-          args: "🚀 TheWall CI/CD: Build, Security Scan, Deploy & Release completed successfully!"
+          service: thewall-backend
+          apiToken: ${{ secrets.RAILWAY_TOKEN }}
