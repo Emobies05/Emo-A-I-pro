@@ -13,91 +13,102 @@ class TheWallButterfly extends StatefulWidget {
 }
 
 class _TheWallButterflyState extends State<TheWallButterfly>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   final AudioPlayer _player = AudioPlayer();
   final Random _rand = Random();
-  
+
   late AnimationController _floatController;
   late Animation<double> _floatY;
+  
+  // Divine Pulse for the Glow
+  late AnimationController _glowController;
+  late Animation<double> _glowOpacity;
 
-  // FIXED: Moved position into the State so it is defined
   Offset _position = const Offset(200, 200);
   Timer? _moveTimer;
 
   @override
   void initState() {
     super.initState();
+
     _floatController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2000),
+    )..repeat(reverse: true);
+
+    _floatY = Tween<double>(begin: -12, end: 12).animate(
+      CurvedAnimation(parent: _floatController, curve: Curves.easeInOut),
+    );
+
+    _glowController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
     )..repeat(reverse: true);
 
-    _floatY = Tween<double>(begin: -10, end: 10).animate(
-      CurvedAnimation(parent: _floatController, curve: Curves.easeInOut),
-    );
+    _glowOpacity = Tween<double>(begin: 0.4, end: 0.8).animate(_glowController);
 
-    _startMovement();
+    _startAutoFlight();
   }
 
-  void _startMovement() {
-    _moveTimer = Timer.periodic(const Duration(seconds: 10), (_) {
+  void _startAutoFlight() {
+    _moveTimer = Timer.periodic(const Duration(seconds: 12), (_) {
       final state = context.read<ButterflyState>();
-      if (!state.isOnFlower) {
-        _playWingSound();
-        _moveRandomly();
+      if (!state.isOnFlower && !state.isLanding) {
+        _flyToNewSpot();
       }
     });
   }
 
-  void _moveRandomly() {
+  void _flyToNewSpot() async {
     final size = MediaQuery.of(context).size;
+    await _player.play(AssetSource('wing.wav'));
+    
     setState(() {
       _position = Offset(
-        _rand.nextDouble() * (size.width - 100),
-        _rand.nextDouble() * (size.height - 200),
+        _rand.nextDouble() * (size.width - 150),
+        _rand.nextDouble() * (size.height - 250),
       );
     });
-  }
-
-  Future<void> _playWingSound() async {
-    await _player.play(AssetSource('wing.wav'));
   }
 
   @override
   void dispose() {
     _moveTimer?.cancel();
     _floatController.dispose();
+    _glowController.dispose();
     _player.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // FIXED: Watch the state to react to changes
     final state = context.watch<ButterflyState>();
 
     return AnimatedPositioned(
-      duration: const Duration(milliseconds: 800),
-      curve: Curves.easeInOut,
+      duration: const Duration(milliseconds: 1200),
+      curve: Curves.fastOutSlowIn,
       left: _position.dx,
       top: _position.dy,
       child: AnimatedBuilder(
-        animation: _floatController,
+        animation: Listenable.merge([_floatController, _glowController]),
         builder: (context, child) {
           return Transform.translate(
             offset: Offset(0, _floatY.value),
             child: Container(
               decoration: BoxDecoration(
+                shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: state.glowColor.withOpacity(0.6),
-                    blurRadius: 30,
+                    color: state.glowColor.withOpacity(_glowOpacity.value),
+                    blurRadius: 35,
+                    spreadRadius: 5,
                   ),
                 ],
               ),
               child: Image.asset(
                 'assets/thewall_butterfly.png',
-                width: 130,
+                width: 140,
+                height: 140,
               ),
             ),
           );
