@@ -14,16 +14,16 @@ class TheWallFlower extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.pinkAccent.withOpacity(0.7),
-              blurRadius: 35,
-              spreadRadius: 15,
+              color: Colors.pinkAccent.withOpacity(0.5),
+              blurRadius: 40,
+              spreadRadius: 10,
             ),
           ],
         ),
         child: Image.asset(
-          'assets/thewall_flower.png',
-          width: 120,
-          height: 120,
+          'assets/thewall_flower.png', // Your custom asset
+          width: 130,
+          height: 130,
         ),
       ),
     );
