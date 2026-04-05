@@ -15,7 +15,7 @@ class TheWallFlower extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.pinkAccent.withOpacity(0.4),
-              blurRadius: 50,
+              blurRadius: 60,
               spreadRadius: 10,
             ),
           ],
