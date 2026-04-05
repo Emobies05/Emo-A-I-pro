@@ -10,13 +10,13 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^6.1.1
-  audioplayers: ^5.2.1
+  # Harmonized Versions for Heavily Heaven
+  audioplayers: ^6.4.0
+  speech_to_text: ^7.3.0
+  flutter_tts: ^3.8.5
   flutter_animate: ^4.5.0
   shared_preferences: ^2.2.2
   http: ^1.1.0
-  # ADDED THESE FOR VOICE SUPPORT
-  speech_to_text: ^6.6.2
-  flutter_tts: ^3.8.5
 
 dev_dependencies:
   flutter_test:
