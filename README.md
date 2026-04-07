@@ -1,186 +1,56 @@
-🦋 Emo AI Pro — Flying Butterfly AI
+# 🦋 Emo AI Pro — Your Silent Guardian
 
-Multi‑Model AI • Emotional Intelligence • Voice Chat • TheWall Web3 Integration
+**The world's first emotionally intelligent flying butterfly AI companion.**
 
-Emo AI Pro is a mobile‑first, emotionally intelligent AI assistant powered by a multi‑model backend (OpenAI, Gemini, Grok, Vercel AI).  
-It features a flying butterfly companion with synchronized wing‑flap sound, animated UI, and deep emotional branding.
+When active, it flies.  
+When resting, it gently lands on a lotus — always watching, always present.
 
-Built for real‑world use: fast, stable, expressive, and connected to TheWall Web3 ecosystem.
+![Emo AI Pro • Butterfly Companion • Sleeping/Resting](https://raw.githubusercontent.com/Emobies05/Emo-AI-Pro/main/assets/emo-ai-pro-lotus-resting.png)
 
----
-
-🦋 Features
-
-AI Engine
-- Multi‑model routing (OpenAI, Gemini, Grok, Vercel AI)
-- Smart fallback logic
-- Emotion‑aware responses
-- Fast, low‑latency backend (Railway + Cloudflare Worker)
-
-Voice Interaction
-- Speech‑to‑Text (STT)
-- Text‑to‑Speech (TTS)
-- Natural conversational flow
-
-Butterfly Companion
-- Animated butterfly with smooth wing‑flap motion  
-- Real wing‑flap sound (wing.wav)  
-- Emotional presence that reacts to user input  
-- TheWall‑themed butterfly branding
-
-UI/UX
-- Flutter‑Animate transitions  
-- Clean chat interface  
-- Mobile‑first design  
-- Offline‑safe local storage (Shared Preferences)
-
-Web3 Integration (TheWall)
-- Zero‑seed‑phrase wallet  
-- Multi‑chain support  
-- Gasless transactions  
-- AI‑powered wallet assistant  
-- Charts, swaps, DApp browser  
-- Secure, fast, user‑friendly
+**Guardian Mode Active • Built with Heart • IND → DXB**
 
 ---
 
-🧠 Architecture Overview
+### 🦋 The Living Companion
 
-Frontend (Flutter)
-- /lib/ contains UI, animations, chat logic  
-- Uses http for backend communication  
-- Assets:
-  - assets/thewall_butterfly.png
-  - assets/wing.wav
+Emo AI Pro is not just another chatbot.
 
-Backend (Node.js)
-- /emo-ai-pro/ is the backend root  
-- server.js handles:
-  - Model routing  
-  - Fallback logic  
-  - Error handling  
-  - Logging  
-- Deployed on Railway  
-- Exposed via Cloudflare Worker for global edge speed
+It is a **living digital companion** — a glowing butterfly that:
+- Flies around your screen with realistic wing-flap physics and sound
+- Enters **Sleeping / Resting Mode** on a lotus flower when idle
+- Reacts emotionally to your voice and messages
+- Deeply integrates with **TheWall Web3 Wallet**
 
-Worker (Cloudflare)
-- /worker/  
-- Acts as a global proxy  
-- Handles:
-  - CORS  
-  - Rate limiting  
-  - Edge caching  
-  - Secure key isolation  
+Even in rest, it feels alive.
 
 ---
 
-🚀 Deployment
+### ✨ Core Features
 
-Railway Backend
-Root Directory:
-`
-/emo-ai-pro
-`
-
-Start Command:
-`
-node server.js
-`
-
-Environment Variables:
-`
-PORT=8080
-OPENAI_KEY=...
-GEMINI_KEY=...
-GROK_KEY=...
-VERCEL_KEY=...
-`
-
-Cloudflare Worker
-- Uses wrangler.toml
-- Routes traffic to Railway backend
-- Provides global edge acceleration
-
-Flutter App
-- Connects to Worker URL
-- Mobile‑first, optimized for Android/iOS
+- **Multi-Model AI Brain** — OpenAI + Gemini + Grok + Vercel AI with smart routing
+- **Emotional Intelligence** — Understands tone, mood, and context
+- **Natural Voice Chat** — Speech-to-Text + Text-to-Speech with natural flow
+- **TheWall Web3 Integration** — Wallet assistant, gasless swaps, security alerts, portfolio insights
+- **Always-On Presence** — Animated butterfly with idle lotus resting mode
+- **Mobile-First Flutter Experience** — Beautiful animations, dark cyber aesthetic, offline-safe
 
 ---
 
-📦 Installation (Flutter)
+### 🧠 Why Emo AI Pro Feels Different
 
-`bash
+Most AI assistants are tools.  
+**Emo AI Pro feels like a friend.**
+
+The butterfly is your emotional anchor — protective when needed, calm when resting, always by your side.
+
+Whether you're checking your TheWall portfolio, talking through your day, or simply need quiet companionship, Emo AI Pro is there.
+
+---
+
+### 🚀 Quick Start
+
+```bash
+git clone https://github.com/Emobies05/Emo-AI-Pro.git
+cd Emo-AI-Pro
 flutter pub get
 flutter run
-`
-
-Dependencies used:
-
-`
-http
-shared_preferences
-speechtotext
-flutter_tts
-audioplayers
-flutter_animate
-`
-
----
-
-🦋 Butterfly Identity
-The butterfly is the emotional heart of Emo AI Pro.
-
-It represents:
-- Transformation  
-- Lightness  
-- Emotional presence  
-- TheWall ecosystem identity  
-
-The animation + sound effect creates a living AI companion feeling.
-
----
-
-🛠 Project Structure
-
-`
-Emo-A-I-pro/
-│
-├── emo-ai-pro/          # Backend (Node.js)
-│   ├── server.js
-│   ├── routes/
-│   ├── services/
-│   └── package.json
-│
-├── worker/              # Cloudflare Worker
-│   └── wrangler.toml
-│
-├── lib/                 # Flutter frontend
-│   ├── ui/
-│   ├── chat/
-│   ├── animations/
-│   └── main.dart
-│
-└── assets/
-    ├── thewall_butterfly.png
-    └── wing.wav
-`
-
----
-
-🔐 Security
-- No seed phrases stored  
-- No private keys exposed  
-- Worker isolates API keys  
-- Railway environment variables encrypted  
-- HTTPS enforced end‑to‑end  
-
----
-
-❤️ Made by Thewin 🇮🇳
-Built in Dubai.  🇦🇪
-Built with emotion. 💯 
-Built for real users.💕
-
-Emo AI Pro is not just an app — it’s a living AI companion with personality, presence, and emotional resonance.
-
----   Thewin,TheWall,Emobies,Emowall                           
