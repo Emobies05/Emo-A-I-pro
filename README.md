@@ -1,169 +1,192 @@
 # 🦋 Emo AI Pro  
-## The Emotionally Intelligent AI Companion for the Always‑On Digital World
+## Pro Emotional Intelligence Layer for Emowall AI
 
-**Emo AI Pro** is a next‑generation emotionally intelligent AI companion designed to exist not as a tool, but as a **living digital presence**.
+./assets/butterfly-demo.gif
 
-Represented as a glowing butterfly, Emo AI Pro adapts to the user’s emotional state, context, and intent — offering calm companionship, intelligent assistance, and quiet protection in an always‑connected world.
-
-> When active, it flies.  
-> When idle, it rests on a lotus.  
-> Even in silence, it feels alive.
+> *Placeholder GIF — replace with real butterfly animation when ready*
 
 ---
 
-## 🌍 Vision
+## 🌍 What is Emo AI Pro?
 
-As artificial intelligence becomes ubiquitous, differentiation will no longer come from raw intelligence alone.
+**Emo AI Pro** is the **professional, emotional‑intelligence upgrade** built on top of **Emowall AI 2.0**, a multi‑generational AI safety platform already live on the Google Play Store.
 
-**Presence, trust, and emotional awareness** define the next generation of AI.
+While **Emowall AI** focuses on **life‑saving protection and emergency response**,  
+**Emo AI Pro adds emotional awareness, calm presence, and proactive wellbeing**.
 
-Emo AI Pro is built to be:
-- Ambient, not intrusive  
-- Emotionally aware, not reactive  
-- Always present, never demanding  
+Together, they form a complete **AI Safety + Emotional Intelligence Platform**.
 
 ---
 
-## 🚀 What Makes Emo AI Pro Unique
+## 🧱 Product Relationship (Important)
 
-### 🦋 1. A Living Interface
-The butterfly is not a mascot — it *is* the interface.
+```
+Emo AI Pro (Emotional Intelligence Layer)
+        ↓
+Emowall AI 2.0 (Guardian & Safety Engine)
+        ↓
+Family · Emergency Contacts · Authorities
+```
 
-It visually communicates state without notifications or prompts:
-
-- **Active Mode** — expressive free flight
-- **Idle Mode** — gentle hovering
-- **Resting Mode** — lotus landing with breathing glow
-- **Alert Mode** — faster wings, heightened focus
-
-This creates an **ambient UX** that feels natural and intuitive.
+- ✅ Emo AI Pro does **not replace** Emowall AI  
+- ✅ Emo AI Pro **enhances and extends** it  
+- ✅ Safety logic always remains with Emowall AI  
 
 ---
 
-### 🧠 2. Emotional Intelligence Engine
-Emo AI Pro continuously evaluates emotional and contextual signals:
+## 🦋 Why Emo AI Pro Exists
 
-**Signals Analysed**
-- Message sentiment and intent
-- Voice pace, tone, and pauses
+Emergencies are often preceded by **emotional distress**.
+
+Emo AI Pro is designed to:
+- Detect stress before danger
+- Offer calm guidance before escalation
+- Build emotional trust over time
+- Reduce false alarms and panic
+- Improve overall family wellbeing
+
+---
+
+## 🧠 Core Capabilities
+
+### 🦋 Living Butterfly Interface
+The butterfly is not a mascot — it is the interface.
+
+- **Active Mode** → Free flight, expressive motion  
+- **Idle Mode** → Gentle hover  
+- **Resting Mode** → Lotus landing with breathing glow  
+- **Alert Mode** → Faster wings, focused presence  
+
+This creates an **ambient, non‑intrusive experience**.
+
+---
+
+### 🧠 Emotional Intelligence Engine
+Emo AI Pro continuously analyses:
+
+- Voice tone & pace
+- Message sentiment
 - Interaction frequency
-- Time and situational context
-- Security or wallet‑related triggers
+- Time & context patterns
+- Safety‑related triggers from Emowall AI
 
 **Emotional States**
 - Calm 🌿  
 - Curious 🦋  
-- Protective 🛡  
 - Concerned 💭  
+- Protective 🛡  
 - Resting 🌸  
 
-These states directly influence:
+These states influence:
+- Responses
+- Voice tone
 - Animation behaviour
-- Voice tone and pacing
-- Response depth and timing
+- Intervention timing
 
 ---
 
-### 🔀 3. Multi‑Model AI Brain (Vendor‑Agnostic)
-Emo AI Pro intelligently routes requests across multiple AI models:
+### 🔀 Multi‑Model AI Brain
+Emo AI Pro intelligently routes tasks across multiple AI models:
 
-- OpenAI  
-- Gemini  
-- Grok  
-- Vercel AI  
+- OpenAI
+- Gemini
+- Grok
+- Vercel AI
 
-Routing decisions are based on:
+Routing is based on:
 - Emotional context
 - Task type
-- Latency and reliability
+- Reliability
 - Cost efficiency
 
-This ensures **best‑in‑class output without platform lock‑in**.
+This ensures **best‑fit intelligence without vendor lock‑in**.
 
 ---
 
-### 🔐 4. Web3‑Native Companion (TheWall Integration)
-Emo AI Pro integrates deeply with **TheWall** ecosystem to act as a quiet digital guardian:
+## 🛡 Built on Emowall AI 2.0 (Live on Play Store)
 
-- Portfolio insights
-- Passive security monitoring
-- Risk and anomaly alerts
-- Gasless transaction guidance
+**Emowall AI 2.0** provides the safety foundation:
 
-✅ No private keys are stored  
-✅ Explicit user consent required for actions  
+### Guardian Mode (Children)
+- Kidnap detection via voice AI
+- Route deviation alerts
+- Auto SOS & police escalation
+- Silent evidence recording
+
+### Shield Mode (Students)
+- Ragging detection
+- Campus SOS
+- Multi‑platform alerts
+
+### Care Mode (Accessibility)
+- Blind assistance
+- Deaf alerts
+- Speech‑impaired SOS
+
+### Family & Health
+- Child emotional monitoring
+- Women’s safety support
+- Offline‑first operation
+- No subscription required
+
+Emo AI Pro **plugs into this system** as a Pro intelligence layer.
+
+---
+
+## 🔐 Privacy & Trust
+
+- No private key storage
+- No emotional data selling
+- Voice data processed transiently
+- Explicit consent for actions
+- Safety‑first architecture
+
+Trust is non‑negotiable.
 
 ---
 
 ## 🏗 Architecture Overview
 
-### Frontend
+**Frontend**
 - Flutter (mobile‑first)
 - State‑driven animation engine
-- Voice input/output (STT / TTS)
+- Voice input/output
 - Offline‑safe local state
 
-### Backend
+**Backend**
+- Emotional analysis pipeline
 - AI orchestration & routing
-- Emotion analysis pipeline
 - Session memory
-- Web3 assistant services
+- Secure bridge to Emowall AI
 
-### Infrastructure
-- **Vercel** — Web & API
-- **Railway** — Workers & background services
-
----
-
-## 🧩 Repository Structure
-
-```text
-agent/              → AI routing & orchestration
-worker/             → Background emotion & task processing
-emo-ai-pro/         → Flutter application
-thewall-backend/    → Web3 services & APIs
-thewall-ui/         → Wallet UI components
-lib/                → Shared logic
-routes/             → API routes
-```
+**Infrastructure**
+- Vercel (APIs & web)
+- Railway (workers & background services)
 
 ---
 
-## 🔐 Security & Privacy
+## 🛣 Roadmap
 
-Emo AI Pro is built with privacy as a first‑class principle:
-
-- No private key storage
-- No sale or sharing of emotional data
-- Voice data processed transiently
-- Optional local‑only mode
-
-User sovereignty is non‑negotiable.
-
----
-
-## 🛣 Product Roadmap
-
-### Phase 1 — Foundation ✅
+### Phase 1 — Pro Companion (Current)
 - Butterfly companion
 - Emotional AI chat
 - Voice interaction
-- Lotus resting mode
-- Web3 read‑only assistance
+- Resting / idle modes
+- Emowall AI integration
 
-### Phase 2 — Growth
-- Long‑term memory & personality evolution
-- Emotion‑driven UI changes
-- Expanded Web3 actions
+### Phase 2 — Emotional Growth
+- Long‑term mood memory
+- Family emotional insights (opt‑in)
+- Adaptive personality
 
-### Phase 3 — Expansion
+### Phase 3 — Ambient Future
 - On‑device AI
-- AR companion
-- Multi‑environment presence
+- AR butterfly presence
+- Cross‑environment continuity
 
 ---
 
-## 🧪 Getting Started (Developers)
+## 📦 Getting Started (Developers)
 
 ```bash
 git clone https://github.com/Emobies05/Emo-A-I-pro.git
@@ -176,22 +199,18 @@ flutter run
 
 ## 👤 Creator
 **Emobies05 (THEWIN)**  
-IND → DXB  
+Founder — Emowall AI  
+IND → DXB 🇮🇳🇦🇪  
 
 ---
 
-## 🌱 Investor Note
-Emo AI Pro sits at the intersection of:
+## 🌱 Closing Note
 
-- Emotional AI  
-- Ambient computing  
-- Companion UX  
-- Web3 security  
+**Emowall AI saves lives.**  
+**Emo AI Pro understands lives.**
 
-As AI becomes universal, **emotion, presence, and trust** become the moat.
-
-Emo AI Pro is designed for that future.
+Together, they represent the future of **responsible, emotionally intelligent AI for families**.
 
 🦋
 
----
+----
