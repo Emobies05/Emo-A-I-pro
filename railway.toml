@@ -1,5 +1,0 @@
-[build]
-root = "Emo-A-I-pro/emo-ai-pro"
-
-[start]
-cmd = "node server.js"
