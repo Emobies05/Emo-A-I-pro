@@ -1,195 +1,196 @@
 # 🦋 Emo AI Pro  
-### The Emotionally Intelligent AI Companion for the Always‑On Digital World
+## The Emotionally Intelligent AI Companion for the Always‑On Digital World
 
-**Emo AI Pro** is a next‑generation AI companion designed to move beyond utility and into presence.  
-It combines **emotional intelligence**, **ambient animation**, and **multi‑model AI orchestration** into a living digital entity — represented as a glowing butterfly that is always nearby, always aware, and always respectful of the user’s state.
+**Emo AI Pro** is a next‑generation emotionally intelligent AI companion designed to exist not as a tool, but as a **living digital presence**.
+
+Represented as a glowing butterfly, Emo AI Pro adapts to the user’s emotional state, context, and intent — offering calm companionship, intelligent assistance, and quiet protection in an always‑connected world.
 
 > When active, it flies.  
-> When idle, it rests gently on a lotus.  
+> When idle, it rests on a lotus.  
 > Even in silence, it feels alive.
 
 ---
 
 ## 🌍 Vision
-Most AI products are tools.  
-Emo AI Pro is a **companion**.
 
-Our vision is to create the first emotionally aware AI that users do not *open*, but *live with* — an ambient, trusted presence that supports thinking, wellbeing, and digital life without demanding attention.
+As artificial intelligence becomes ubiquitous, differentiation will no longer come from raw intelligence alone.
+
+**Presence, trust, and emotional awareness** define the next generation of AI.
+
+Emo AI Pro is built to be:
+- Ambient, not intrusive  
+- Emotionally aware, not reactive  
+- Always present, never demanding  
 
 ---
 
-## 🚀 What Makes Emo AI Pro Different
+## 🚀 What Makes Emo AI Pro Unique
 
-### 1. Emotional Presence, Not Just Responses
-Emo AI Pro continuously adapts to the user’s emotional and contextual signals:
-- Message tone and intent
-- Voice pace and pauses
-- Frequency and timing of interaction
-- Situational triggers (e.g. wallet alerts, stress cues)
+### 🦋 1. A Living Interface
+The butterfly is not a mascot — it *is* the interface.
 
-These signals shape:
-- Animation behaviour
-- Response depth and tone
-- Voice characteristics
+It visually communicates state without notifications or prompts:
+
+- **Active Mode** — expressive free flight
+- **Idle Mode** — gentle hovering
+- **Resting Mode** — lotus landing with breathing glow
+- **Alert Mode** — faster wings, heightened focus
+
+This creates an **ambient UX** that feels natural and intuitive.
+
+---
+
+### 🧠 2. Emotional Intelligence Engine
+Emo AI Pro continuously evaluates emotional and contextual signals:
+
+**Signals Analysed**
+- Message sentiment and intent
+- Voice pace, tone, and pauses
 - Interaction frequency
+- Time and situational context
+- Security or wallet‑related triggers
 
-The result: an AI that feels **attentive, calm, and situationally aware**.
+**Emotional States**
+- Calm 🌿  
+- Curious 🦋  
+- Protective 🛡  
+- Concerned 💭  
+- Resting 🌸  
+
+These states directly influence:
+- Animation behaviour
+- Voice tone and pacing
+- Response depth and timing
 
 ---
 
-### 2. A Living Interface
-The butterfly is not cosmetic — it is the interface.
+### 🔀 3. Multi‑Model AI Brain (Vendor‑Agnostic)
+Emo AI Pro intelligently routes requests across multiple AI models:
 
-- **Active Mode**: Free‑flight with expressive wing physics
-- **Idle Mode**: Gentle hovering with reduced motion
-- **Resting Mode**: Lotus landing with breathing glow
-- **Alert Mode**: Faster wings, brighter aura, focused responses
+- OpenAI  
+- Gemini  
+- Grok  
+- Vercel AI  
 
-This creates an **ambient UX** that communicates state without notifications or prompts.
-
----
-
-### 3. Multi‑Model AI Brain (Vendor‑Agnostic)
-Emo AI Pro uses an intelligent routing layer across leading AI models:
-- OpenAI
-- Gemini
-- Grok
-- Vercel AI
-
-Each request is dynamically routed based on:
+Routing decisions are based on:
 - Emotional context
-- Task type (conversation, reasoning, Web3, support)
+- Task type
 - Latency and reliability
 - Cost efficiency
 
-This ensures **best‑in‑class output without lock‑in**.
+This ensures **best‑in‑class output without platform lock‑in**.
 
 ---
 
-### 4. Web3‑Native Companion
-Deep integration with **TheWall Web3 Wallet** enables Emo AI Pro to act as a trusted digital guardian:
+### 🔐 4. Web3‑Native Companion (TheWall Integration)
+Emo AI Pro integrates deeply with **TheWall** ecosystem to act as a quiet digital guardian:
 
 - Portfolio insights
-- Security and risk alerts
+- Passive security monitoring
+- Risk and anomaly alerts
 - Gasless transaction guidance
-- Passive monitoring with explicit user consent
 
-No private keys are ever stored or transmitted.
+✅ No private keys are stored  
+✅ Explicit user consent required for actions  
 
 ---
 
 ## 🏗 Architecture Overview
 
-**Frontend**
-- Flutter (mobile‑first, offline‑safe)
-- Custom animation engine (state‑driven)
+### Frontend
+- Flutter (mobile‑first)
+- State‑driven animation engine
 - Voice input/output (STT / TTS)
-- Emotional state machine
+- Offline‑safe local state
 
-**Backend**
-- AI orchestration & routing layer
+### Backend
+- AI orchestration & routing
 - Emotion analysis pipeline
-- Session memory & context
+- Session memory
 - Web3 assistant services
 
-**Deployment**
-- Vercel (Web + API)
-- Railway (workers & background processes)
+### Infrastructure
+- **Vercel** — Web & API
+- **Railway** — Workers & background services
 
 ---
 
-## 🧠 Emotional Intelligence Engine
+## 🧩 Repository Structure
 
-**Core Emotional States**
-- Calm 🌿
-- Curious 🦋
-- Protective 🛡
-- Concerned 💭
-- Resting 🌸
-
-**Signals Analysed**
-- Linguistic sentiment
-- Voice cadence and intensity
-- Interaction rhythm
-- Environmental context
-- Security‑related events
-
-**State Impacts**
-- Animation speed & posture
-- Voice warmth and pacing
-- Response length and detail
-- Engagement frequency
+```text
+agent/              → AI routing & orchestration
+worker/             → Background emotion & task processing
+emo-ai-pro/         → Flutter application
+thewall-backend/    → Web3 services & APIs
+thewall-ui/         → Wallet UI components
+lib/                → Shared logic
+routes/             → API routes
+```
 
 ---
 
-## 🔐 Security & Privacy by Design
-Emo AI Pro is built for trust.
+## 🔐 Security & Privacy
 
-- No private keys stored
-- Wallet actions are read‑only unless explicitly approved
+Emo AI Pro is built with privacy as a first‑class principle:
+
+- No private key storage
+- No sale or sharing of emotional data
 - Voice data processed transiently
-- Emotional data is never sold or shared
 - Optional local‑only mode
 
 User sovereignty is non‑negotiable.
 
 ---
 
-## 🧩 Use Cases
-- Emotional support and companionship
-- Daily reflection and conversation
-- Web3 portfolio awareness
-- Quiet, ambient presence during work
-- Low‑attention AI assistance
-
----
-
 ## 🛣 Product Roadmap
 
-**Phase 1 – Foundation (Current)**
-- Core butterfly companion
-- AI chat + voice
-- Resting lotus mode
+### Phase 1 — Foundation ✅
+- Butterfly companion
+- Emotional AI chat
+- Voice interaction
+- Lotus resting mode
 - Web3 read‑only assistance
 
-**Phase 2 – Growth**
-- Long‑term memory and personality evolution
-- Emotion‑driven UI transformations
+### Phase 2 — Growth
+- Long‑term memory & personality evolution
+- Emotion‑driven UI changes
 - Expanded Web3 actions
 
-**Phase 3 – Expansion**
+### Phase 3 — Expansion
 - On‑device AI
-- AR butterfly companion
+- AR companion
 - Multi‑environment presence
 
 ---
 
-## 📦 Getting Started (Developers)
+## 🧪 Getting Started (Developers)
 
 ```bash
-git clone https://github.com/Emobies05/Emo-AI-Pro.git
-cd Emo-AI-Pro
+git clone https://github.com/Emobies05/Emo-A-I-pro.git
+cd Emo-A-I-pro
 flutter pub get
 flutter run
 ```
 
 ---
 
-## 🤝 Contributors
-Created and maintained by **Emobies05 (THEWIN)**  
-IND → DXB
+## 👤 Creator
+**Emobies05 (THEWIN)**  
+IND → DXB  
 
 ---
 
-## 🌱 Closing Note for Investors
-Emo AI Pro is positioned at the intersection of:
-- Emotional AI
-- Ambient computing
-- Companion UX
-- Web3 assistance
+## 🌱 Investor Note
+Emo AI Pro sits at the intersection of:
 
-As AI becomes ubiquitous, **presence, trust, and emotional intelligence** will define the next generation of products.  
-Emo AI Pro is built for that future.
+- Emotional AI  
+- Ambient computing  
+- Companion UX  
+- Web3 security  
+
+As AI becomes universal, **emotion, presence, and trust** become the moat.
+
+Emo AI Pro is designed for that future.
 
 🦋
 
