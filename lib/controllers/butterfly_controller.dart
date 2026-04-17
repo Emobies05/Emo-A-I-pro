@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 
 class ButterflyState extends ChangeNotifier {
+  // 🌈 Visual state
   Color glowColor = Colors.blueAccent;
   double glowStrength = 0.6;
   double wingSpeed = 1.0;
 
+  // 🧠 Activity state
   bool isSleeping = false;
   bool isListening = false;
   bool isAiTyping = false;
   bool isUserTyping = false;
 
-  // Flower / landing
+  // 🌸 Landing / flower
   bool isLanding = false;
   bool isOnFlower = false;
   Offset flowerPosition = const Offset(150, 500);
+
+  // ---------- BASIC CONTROLS ----------
 
   void setGlow(Color color) {
     glowColor = color;
@@ -24,6 +28,8 @@ class ButterflyState extends ChangeNotifier {
     glowStrength = strength;
     notifyListeners();
   }
+
+  // ---------- AI / USER INTERACTION ----------
 
   void aiTyping() {
     isAiTyping = true;
@@ -55,6 +61,8 @@ class ButterflyState extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ---------- VOICE LISTENING ----------
+
   void startListening() {
     isListening = true;
     glowColor = Colors.purpleAccent;
@@ -70,6 +78,8 @@ class ButterflyState extends ChangeNotifier {
     notifyListeners();
   }
 
+  // ---------- SLEEP / WAKE ----------
+
   void sleep() {
     isSleeping = true;
     glowStrength = 0.2;
@@ -84,27 +94,52 @@ class ButterflyState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void applyEmotion(String text) {
-    final lower = text.toLowerCase();
+  // ---------- ✅ EMOTION ENGINE (IMPORTANT) ----------
+  // Emotion comes from BACKEND, not text
 
-    if (lower.contains("error") || lower.contains("failed")) {
-      glowColor = Colors.redAccent;
-    } else if (lower.contains("warning") || lower.contains("careful")) {
-      glowColor = Colors.yellowAccent;
-    } else if (lower.contains("love") || lower.contains("❤️")) {
-      glowColor = Colors.pinkAccent;
-    } else if (lower.contains("info") || lower.contains("note")) {
-      glowColor = Colors.cyanAccent;
-    } else {
-      glowColor = Colors.blueAccent;
+  void applyEmotion(String emotion) {
+    switch (emotion) {
+      case "calm":
+        glowColor = Colors.blueAccent;
+        glowStrength = 0.6;
+        wingSpeed = 1.0;
+        break;
+
+      case "curious":
+        glowColor = Colors.cyanAccent;
+        glowStrength = 1.0;
+        wingSpeed = 1.4;
+        break;
+
+      case "concerned":
+        glowColor = Colors.orangeAccent;
+        glowStrength = 1.0;
+        wingSpeed = 1.6;
+        break;
+
+      case "protective":
+        glowColor = Colors.redAccent;
+        glowStrength = 1.2;
+        wingSpeed = 1.8;
+        break;
+
+      case "resting":
+        glowColor = Colors.pinkAccent;
+        glowStrength = 0.3;
+        wingSpeed = 0.4;
+        break;
+
+      default:
+        glowColor = Colors.blueAccent;
+        glowStrength = 0.6;
+        wingSpeed = 1.0;
     }
 
-    glowStrength = 1.0;
-    wingSpeed = 1.4;
     notifyListeners();
   }
 
-  // Landing on flower
+  // ---------- 🌸 LANDING / FLOWER ----------
+
   void startLanding() {
     isLanding = true;
     isOnFlower = false;
