@@ -19,7 +19,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # Flutter 3.24.x ഉപയോഗിക്കുന്നത് വഴി എല്ലാ ഡിപെൻഡൻസി പ്രശ്നങ്ങളും മാറും
+      # ഇവിടെ 3.24.x എന്ന് തന്നെ നൽകുക, എങ്കിലേ Dart 3.4+ ലഭിക്കൂ
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -30,7 +30,6 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # ലിസ്റ്റിലുള്ള എല്ലാ പുതിയ കീകളും ഇവിടെ ആഡ് ചെയ്തിട്ടുണ്ട്
       - name: Build APK
         run: |
           flutter build apk --release \
