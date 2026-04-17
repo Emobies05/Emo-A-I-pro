@@ -2,14 +2,17 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class EmoAIPro {
-  static const String baseUrl = "http://localhost:3000/chat";
+  static const String baseUrl = "https://emo-a-i-pro.vercel.app/api/chat";
 
-  static Future<String> sendMessage(String message) async {
+  static Future<String> sendMessage(String message, {List<Map<String, dynamic>>? history}) async {
     try {
       final response = await http.post(
         Uri.parse(baseUrl),
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode({"message": message}),
+        body: jsonEncode({
+          "message": message,
+          "history": history ?? []
+        }),
       );
 
       if (response.statusCode == 200) {
