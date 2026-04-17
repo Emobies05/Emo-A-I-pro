@@ -21,8 +21,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # FIX: We use '3.22.0' or higher to ensure Dart SDK is >= 3.4.0
-      # This resolves the speech_to_text dependency conflict
+      # Flutter 3.24.x ഉപയോഗിക്കുന്നത് വഴി Dart SDK പ്രശ്നം ഒഴിവാക്കാം
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -33,12 +32,12 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # Optional: Add this if you have generated code (like for your API/Models)
-      # - name: Run Build Runner
-      #   run: dart run build_runner build --delete-conflicting-outputs
-
+      # രണ്ട് കീകളും 'dart-define' വഴി ആപ്പിലേക്ക് പാസ്സ് ചെയ്യുന്നു
       - name: Build APK
-        run: flutter build apk --release
+        run: |
+          flutter build apk --release \
+          --dart-define=GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }} \
+          --dart-define=CLOUDFLARE_API_KEY=${{ secrets.CLOUDFLARE_API_KEY }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
