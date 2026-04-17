@@ -2,52 +2,46 @@ name: Build Flutter APK
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
-  # Allows you to run this workflow manually from the Actions tab
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build Android APK
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout the code
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Set up Java (Required for Android builds)
-      - name: Set up JDK 17
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # 3. Set up Flutter
-      # We use 3.x to ensure we get a version higher than 3.4.0 (solving your SDK error)
+      # FIX: We use '3.22.0' or higher to ensure Dart SDK is >= 3.4.0
+      # This resolves the speech_to_text dependency conflict
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: '3.x'
-          cache: true # Speeds up subsequent builds
+          flutter-version: '3.24.x' 
+          cache: true
 
-      # 4. Get dependencies
-      - name: Install Dependencies
+      - name: Install dependencies
         run: flutter pub get
 
-      # 5. Build the APK
-      # --split-per-abi creates smaller APKs for different phone architectures
-      - name: Build APK
-        run: flutter build apk --release --split-per-abi
+      # Optional: Add this if you have generated code (like for your API/Models)
+      # - name: Run Build Runner
+      #   run: dart run build_runner build --delete-conflicting-outputs
 
-      # 6. Upload the result so you can download it
-      - name: Upload APK Artifact
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: release-apk
-          path: build/app/outputs/flutter-apk/*.apk
+          name: emo-ai-pro-release
+          path: build/app/outputs/flutter-apk/app-release.apk
