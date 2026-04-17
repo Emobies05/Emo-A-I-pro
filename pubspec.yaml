@@ -1,48 +1,26 @@
-name: Build Flutter APK
+name: emo_ai_pro
+description: "Multi-Model Emotional AI Companion"
+publish_to: 'none'
+version: 1.0.0+1
 
-on:
-  push:
-    branches: [ "main" ]
-  workflow_dispatch:
+environment:
+  sdk: '>=3.0.0 <4.0.0'
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.1.1
+  audioplayers: ^6.4.0
+  speech_to_text: ^7.3.0
+  flutter_tts: ^3.8.5
+  flutter_animate: ^4.5.0
+  shared_preferences: ^2.2.2
+  http: ^1.1.0
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
 
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      # ഇവിടെ 3.24.x എന്ന് തന്നെ നൽകുക, എങ്കിലേ Dart 3.4+ ലഭിക്കൂ
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          flutter-version: '3.24.x' 
-          cache: true
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Build APK
-        run: |
-          flutter build apk --release \
-          --dart-define=GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }} \
-          --dart-define=CLOUDE_API_KEY=${{ secrets.CLOUDE_API_KEY }} \
-          --dart-define=ASSISTLOOP_API_KEY=${{ secrets.ASSISTLOOP_API_KEY }} \
-          --dart-define=CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }} \
-          --dart-define=CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }} \
-          --dart-define=OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} \
-          --dart-define=VERCEL_AI_API_KEY=${{ secrets.VERCEL_AI_API_KEY }}
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: emo-ai-pro-release
-          path: build/app/outputs/flutter-apk/app-release.apk
+flutter:
+  uses-material-design: true
