@@ -54,6 +54,45 @@ jobs:
         org.gradle.parallel=false
         EOF
 
+    - name: Fix compileSdk in app/build.gradle
+      run: |
+        sed -i 's/compileSdkVersion flutter.compileSdkVersion/compileSdk = 35/g' android/app/build.gradle
+        sed -i 's/compileSdkVersion [0-9]*/compileSdk = 35/g' android/app/build.gradle
+        sed -i "s/ext.kotlin_version = '1.7.10'/ext.kotlin_version = '1.9.10'/g" android/build.gradle
+
+    - name: Flutter pub get
+      run: flutter pub get
+
+    - name: Build APK
+      run: flutter build apk --release
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        CLOUDE_API_KEY: ${{ secrets.CLOUDE_API_KEY }}
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: emo-ai-pro-apk
+        path: build/app/outputs/flutter-apk/app-release.apk
+    - name: Create fresh Flutter project
+      run: flutter create --platforms=android --project-name emo_ai_pro .
+
+    - name: Restore lib and pubspec
+      run: |
+        rm -rf lib
+        cp -r /tmp/lib_backup lib
+        cp /tmp/pubspec_backup.yaml pubspec.yaml
+
+    - name: Fix gradle properties
+      run: |
+        cat > android/gradle.properties << 'EOF'
+        org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=512m
+        org.gradle.daemon=false
+        android.useAndroidX=true
+        android.enableJetifier=true
+        org.gradle.parallel=false
+        EOF
+
     - name: Flutter pub get
       run: flutter pub get
 
