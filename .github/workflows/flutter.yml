@@ -24,7 +24,7 @@ jobs:
     - name: Install Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: "3.24.0"
+        flutter-version: "3.27.0"
         cache: true
 
     - name: Backup lib and pubspec
@@ -34,6 +34,49 @@ jobs:
 
     - name: Remove old android folder
       run: rm -rf android
+
+    - name: Create fresh Flutter project
+      run: flutter create --platforms=android --project-name emo_ai_pro .
+
+    - name: Fix Kotlin version
+      run: |
+        sed -i 's/org.jetbrains.kotlin.android" version ".*"/org.jetbrains.kotlin.android" version "1.9.22"/g' android/settings.gradle
+
+    - name: Restore lib and pubspec
+      run: |
+        rm -rf lib
+        cp -r /tmp/lib_backup lib
+        cp /tmp/pubspec_backup.yaml pubspec.yaml
+
+    - name: Fix gradle properties
+      run: |
+        cat > android/gradle.properties << 'EOF'
+        org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=512m
+        org.gradle.daemon=false
+        android.useAndroidX=true
+        android.enableJetifier=true
+        org.gradle.parallel=false
+        EOF
+
+    - name: Fix compileSdk
+      run: |
+        sed -i 's/compileSdkVersion flutter.compileSdkVersion/compileSdk = 35/g' android/app/build.gradle
+        sed -i 's/compileSdkVersion [0-9]*/compileSdk = 35/g' android/app/build.gradle
+
+    - name: Flutter pub get
+      run: flutter pub get
+
+    - name: Build APK
+      run: flutter build apk --release
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        CLOUDE_API_KEY: ${{ secrets.CLOUDE_API_KEY }}
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: emo-ai-pro-apk
+        path: build/app/outputs/flutter-apk/app-release.apk
 
     - name: Create fresh Flutter project
       run: flutter create --platforms=android --project-name emo_ai_pro .
