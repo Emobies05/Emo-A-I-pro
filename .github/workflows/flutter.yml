@@ -25,7 +25,34 @@ jobs:
       uses: subosito/flutter-action@v2
       with:
         flutter-version: "3.24.0"
-        cache: false
+        cache: true
+
+    - name: Backup lib and pubspec
+      run: |
+        cp -r lib /tmp/lib_backup
+        cp pubspec.yaml /tmp/pubspec_backup.yaml
+
+    - name: Remove old android folder
+      run: rm -rf android
+
+    - name: Create fresh Flutter project
+      run: flutter create --platforms=android --project-name emo_ai_pro .
+
+    - name: Restore lib and pubspec
+      run: |
+        rm -rf lib
+        cp -r /tmp/lib_backup lib
+        cp /tmp/pubspec_backup.yaml pubspec.yaml
+
+    - name: Fix gradle properties
+      run: |
+        cat > android/gradle.properties << 'EOF'
+        org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=512m
+        org.gradle.daemon=false
+        android.useAndroidX=true
+        android.enableJetifier=true
+        org.gradle.parallel=false
+        EOF
 
     - name: Flutter pub get
       run: flutter pub get
