@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter_tts/flutter_tts.dart';
 import '../widgets/emo_butterfly.dart';
+import '../controllers/butterfly_controller.dart';
+import 'emo_api.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
