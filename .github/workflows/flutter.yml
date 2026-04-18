@@ -73,10 +73,14 @@ jobs:
         CLOUDE_API_KEY: ${{ secrets.CLOUDE_API_KEY }}
 
     - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: emo-ai-pro-apk
-        path: build/app/outputs/flutter-apk/app-release.apk
+  uses: actions/upload-artifact@v4
+  with:
+    name: emo-ai-pro-apk-${{ github.run_number }}  # ← ith മാത്രം
+    path: build/app/outputs/flutter-apk/app-release.apk
+      
+      
+        
+    
 
     - name: Create fresh Flutter project
       run: flutter create --platforms=android --project-name emo_ai_pro .
