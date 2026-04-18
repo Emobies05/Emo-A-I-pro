@@ -35,8 +35,10 @@ jobs:
     - name: Remove old android folder
       run: rm -rf android
 
-    - name: Create fresh Flutter project
-      run: flutter create --platforms=android --project-name emo_ai_pro .
+    - name: Fix Kotlin version
+      run: |
+        sed -i 's/org.jetbrains.kotlin.android" version ".*"/org.jetbrains.kotlin.android" version "1.9.22"/g' android/settings.gradle
+  
 
     - name: Restore lib and pubspec
       run: |
