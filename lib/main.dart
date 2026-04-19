@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'controllers/butterfly_controller.dart';
-import 'screens/chat_screen.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(
@@ -22,7 +22,7 @@ class EmoAIProApp extends StatelessWidget {
       title: 'Emo AI Pro',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(useMaterial3: true),
-      home: const ChatScreen(),
+      home: const HomeScreen(),
     );
   }
 }
