@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:provider/provider.dart';
-
 import '../controllers/butterfly_controller.dart';
 
 class TheWallButterfly extends StatefulWidget {
@@ -20,8 +19,6 @@ class _TheWallButterflyState extends State<TheWallButterfly>
 
   late AnimationController _floatController;
   late Animation<double> _floatY;
-
-  // ✨ Glow pulse
   late AnimationController _glowController;
   late Animation<double> _glowOpacity;
 
@@ -52,7 +49,6 @@ class _TheWallButterflyState extends State<TheWallButterfly>
     _startAutoFlight();
   }
 
-  // 🦋 Auto wandering
   void _startAutoFlight() {
     _moveTimer = Timer.periodic(const Duration(seconds: 12), (_) {
       final state = context.read<ButterflyState>();
@@ -64,10 +60,9 @@ class _TheWallButterflyState extends State<TheWallButterfly>
 
   Future<void> _flyToNewSpot() async {
     final size = MediaQuery.of(context).size;
-
     try {
       await _player.stop();
-      await _player.play(AssetSource('wing.wav'));
+      await _player.play(AssetSource('sounds/wing.wav'));
     } catch (_) {}
 
     setState(() {
@@ -92,7 +87,10 @@ class _TheWallButterflyState extends State<TheWallButterfly>
     final state = context.watch<ButterflyState>();
 
     return AnimatedPositioned(
-      duration: Duration(milliseconds: (1200 / state.wingSpeed).clamp(600, 1600).toInt()),
+      duration: Duration(
+        milliseconds:
+            (1200 / state.wingSpeed).clamp(600, 1600).toInt(),
+      ),
       curve: Curves.fastOutSlowIn,
       left: _position.dx,
       top: _position.dy,
@@ -106,15 +104,16 @@ class _TheWallButterflyState extends State<TheWallButterfly>
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: state.glowColor
-                        .withOpacity(_glowOpacity.value * state.glowStrength),
+                    color: state.glowColor.withOpacity(
+                      _glowOpacity.value * state.glowStrength,
+                    ),
                     blurRadius: 40,
                     spreadRadius: 6,
                   ),
                 ],
               ),
               child: Image.asset(
-                'assets/thewall_butterfly.png',
+                'assets/emo_butterfly.png',
                 width: 140,
                 height: 140,
               ),
